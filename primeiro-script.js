@@ -1,1 +1,10 @@
-console.log('hello world')
+console.log('n-fatorial');
+
+const fatorial = (num) => {
+    if(num === 0)
+        return 1;
+
+    return num * fatorial(num - 1);
+}
+
+console.log(`O Fatorial de 5 é igual a ${fatorial(5)}`)
