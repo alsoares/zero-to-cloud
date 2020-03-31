@@ -1,4 +1,5 @@
 const fat = require('./fatorial');
+const yargs = require('yargs');
 
 console.log('n-fatorial');
 
@@ -7,7 +8,8 @@ console.log('n-fatorial');
 process.on('exit', () =>{
     console.log('script está prestes a terminar');
 }); */
+const argv = yargs.demandOption('num').argv;
 
-const num = parseInt(process.argv[2]);
+const num = parseInt(argv.num);
 
 console.log(`O Fatorial de ${num} é igual a ${fat(num)}`);
