@@ -1,21 +1,13 @@
-console.log(module.id)
+const fat = require('./fatorial');
 
-const fatorial = (num) => {
-    if(num === 0)
-        return 1;
+console.log('n-fatorial');
 
-    return num * fatorial(num - 1);
-}
+/* console.log(`Executando o script a partir do diretorio ${process.cwd()}`);
 
-//exports = fatorial;
+process.on('exit', () =>{
+    console.log('script está prestes a terminar');
+}); */
 
-module.exports = fatorial;
+const num = parseInt(process.argv[2]);
 
-/* module.exports = {
-    fatorial: fatorial
-}
- */
-
-// module.exports = {
-//     fatorial
-// }
+console.log(`O Fatorial de ${num} é igual a ${fat(num)}`);
