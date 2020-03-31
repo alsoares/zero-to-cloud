@@ -10,4 +10,4 @@ process.on('exit', () =>{
 
 const num = parseInt(process.argv[2]);
 
-console.log(`O Fatorial de ${num} é igual a ${fat.fatorial(num)}`);
+console.log(`O Fatorial de ${num} é igual a ${fat(num)}`);

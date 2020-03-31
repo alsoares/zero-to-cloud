@@ -5,4 +5,15 @@ const fatorial = (num) => {
     return num * fatorial(num - 1);
 }
 
-exports.fatorial = fatorial;
+//exports = fatorial;
+
+module.exports = fatorial;
+
+/* module.exports = {
+    fatorial: fatorial
+}
+ */
+
+// module.exports = {
+//     fatorial
+// }
