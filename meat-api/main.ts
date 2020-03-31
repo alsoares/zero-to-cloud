@@ -1,11 +1,3 @@
-import * as restify from 'restify';
-
-const server = restify.createServer({
-    name: 'mead-api',
-    version: '1.0.0'
-});
-
-server.use(restify.plugins.queryParser());
 
 server.get('/info', [
     (req, res, next) => {
