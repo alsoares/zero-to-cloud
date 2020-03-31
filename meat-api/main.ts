@@ -1,29 +1,12 @@
+import { Server } from './server/server'
 
-server.get('/info', [
-    (req, res, next) => {
-        if(req.userAgent() && req.userAgent().includes('MSIE 7.0')){
-            //res.status(400);
-           // res.json({message: 'Atualize seu browser'});
-            
-           let error: any = new Error();
-           error.statusCode = 400;
-           error.message = 'Atualize seu browser';
-           return next(error);
-        }
-        return next()
+const server = new Server();
 
-    }, (req, res, next) => {
-        res.json({
-            browser: req.userAgent(),
-            method: req.method,
-            url: req.href(),
-            path: req.path(),
-            query: req.query
-        });
-        return next()
-    }]);
-
-
-server.listen(3000, () => {
-    console.log('API rodando na porta 3000')
-});
+server.bootstrap()
+    .then(s => {
+        console.log('Servidor rodando em', s.app.address())
+    }).catch(error => {
+        console.log('Falha ao iniciar servidor');
+        console.error(error);
+        process.exit(1);
+    })

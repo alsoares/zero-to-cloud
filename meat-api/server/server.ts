@@ -1,8 +1,9 @@
 import * as restify from 'restify';
-
+import {environment} from  '../common/environment'
 export class Server {
 
     app: restify.Server;
+
     initRoutes(): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
@@ -14,8 +15,31 @@ export class Server {
 
                 this.app.use(restify.plugins.queryParser());
                
-                this.app.listen(3000, () => {
-                    console.log('API rodando na porta 3000')
+                this.app.get('/info', [
+                    (req, res, next) => {
+                        if(req.userAgent() && req.userAgent().includes('MSIE 7.0')){
+                            //res.status(400);
+                           // res.json({message: 'Atualize seu browser'});
+                            
+                           let error: any = new Error();
+                           error.statusCode = 400;
+                           error.message = 'Atualize seu browser';
+                           return next(error);
+                        }
+                        return next()
+                
+                    }, (req, res, next) => {
+                        res.json({
+                            browser: req.userAgent(),
+                            method: req.method,
+                            url: req.href(),
+                            path: req.path(),
+                            query: req.query
+                        });
+                        return next()
+                    }]);
+                
+                this.app.listen(environment.server.port, () => {
                     resolve(this.app);
                 });
 
@@ -28,6 +52,5 @@ export class Server {
 
     bootstrap(): Promise<Server> {
         return this.initRoutes().then(() => this);
-
     }
 }
